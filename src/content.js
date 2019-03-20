@@ -80,20 +80,28 @@ const injectChart = async () => {
 	const biases = container.children[0];
 
 	if (data) {
-		const currencies = ['BTC', 'ETH', 'XRP', 'BCH'];
-		data.clusters
-			.filter(currency => currencies.includes(currency.abbr))
-			.forEach(currency => {
-				const container = document.createElement('div');
-				container.innerHTML = `
-				<div class="bias">
-					<span class="ProfileCardStats-statLabel u-block">${escapeHtml(currency.display)}</span>
-					<div class="bias-amount-container">
-						<div class="bias-amount u-bgUserColor" style="width: ${Number(currency.score / 10)}%;"></div>
-					</div>
-				</div>`;
-				biases.appendChild(container.children[0]);
-			});
+		const currencies = data.clusters
+			.filter(currency => ['BTC', 'ETH', 'XRP', 'BCH'].includes(currency.abbr));
+
+		const totalScore = currencies
+			.map(currency => Number(currency.score))
+			.reduce((a, b) => a + b);
+
+		currencies.forEach(currency => {
+			const biasThreshold = 5;
+			let bias = (Number(currency.score) / totalScore) * 100;
+			bias = (bias < biasThreshold) ? 0 : bias;
+
+			const container = document.createElement('div');
+			container.innerHTML = `
+			<div class="bias">
+				<span class="ProfileCardStats-statLabel u-block">${escapeHtml(currency.display)}</span>
+				<div class="bias-amount-container">
+					<div class="bias-amount u-bgUserColor" style="width: ${bias}%;"></div>
+				</div>
+			</div>`;
+			biases.appendChild(container.children[0]);
+		});
 	} else {
 		biases.appendChild(document.createTextNode('No bias data available for this user.'));
 	}
