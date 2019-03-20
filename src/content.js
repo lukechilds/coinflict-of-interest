@@ -22,14 +22,14 @@ const getData = async username => {
 
 const preloadTweetData = () => {
 	Array.from(document.querySelectorAll('.tweet')).forEach(tweet => {
-		if (tweet.dataset.coinbiasPreloaded) {
+		if (tweet.dataset.coinflictPreloaded) {
 			return false;
 		}
 
 		const username = tweet.dataset.screenName;
 		getData(username);
 
-		tweet.dataset.coinbiasPreloaded = true;
+		tweet.dataset.coinflictPreloaded = true;
 	});
 };
 
@@ -39,10 +39,10 @@ const injectChart = async () => {
 	const profileHoverContainer = document.querySelector('#profile-hover-container');
 	const profileCard = profileHoverContainer.querySelector('.profile-card');
 
-	if (!(profileCard && !profileCard.dataset.coinbias)) {
+	if (!(profileCard && !profileCard.dataset.coinflict)) {
 		return;
 	}
-	profileCard.dataset.coinbias = true;
+	profileCard.dataset.coinflict = true;
 
 	const username = profileCard.querySelector('[data-screen-name]').dataset.screenName;
 	const data = await getData(username);

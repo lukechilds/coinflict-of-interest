@@ -1,6 +1,6 @@
-# Coinbias
+# Coinflict of Interest
 
-> Show user biases on crypto Twitter.
+> Browser extension to show user biases on crypto Twitter.
 
 ## License
 
