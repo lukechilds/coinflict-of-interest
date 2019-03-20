@@ -47,11 +47,13 @@ const injectChart = async () => {
 	const username = profileCard.querySelector('[data-screen-name]').dataset.screenName;
 	const data = await getData(username);
 
+	const negativeMargin = 12;
 	const container = document.createElement('div');
 	container.innerHTML = `
 	<div class="ProfileCardBias ProfileCardStats">
 		<style>
 			.ProfileCardBias {
+				margin-top: -${negativeMargin}px;
 				padding-bottom: 8px;
 			}
 
@@ -110,7 +112,7 @@ const injectChart = async () => {
 	profileCardStats.parentNode.insertBefore(biases, profileCardStats);
 
 	const gravitySouth = profileCard.classList.contains('gravity-south');
-	const offset = gravitySouth ? biases.offsetHeight : 0;
+	const offset = gravitySouth ? (biases.offsetHeight - negativeMargin) : 0;
 	profileHoverContainer.style.transform = `translateY(-${offset}px)`;
 };
 
