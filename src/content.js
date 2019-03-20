@@ -20,6 +20,19 @@ const getData = async username => {
 	return data;
 };
 
+const preloadTweetData = () => {
+	Array.from(document.querySelectorAll('.tweet')).forEach(tweet => {
+		if (tweet.dataset.coinbiasPreloaded) {
+			return false;
+		}
+
+		const username = tweet.dataset.screenName;
+		getData(username);
+
+		tweet.dataset.coinbiasPreloaded = true;
+	});
+};
+
 const injectChart = async () => {
 	const profileHoverContainer = document.querySelector('#profile-hover-container');
 	const profileCard = profileHoverContainer.querySelector('.profile-card');
@@ -53,5 +66,8 @@ const injectChart = async () => {
 	profileHoverContainer.style.transform = `translateY(-${offset}px)`;
 };
 
-observer = new MutationObserver(injectChart);
+observer = new MutationObserver(() => {
+	preloadTweetData();
+	injectChart();
+});
 observer.observe(document.body, {childList: true, subtree: true});
