@@ -77,7 +77,7 @@ const injectChart = async () => {
 				border-radius: 4px;
 			}
 		</style>
-		<div><strong>Coinbias</strong></div>
+		<div><strong>Bias</strong></div>
 	</div>`;
 	const biases = container.children[0];
 
