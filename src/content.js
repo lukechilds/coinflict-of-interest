@@ -16,6 +16,10 @@ const injectChart = () => {
 
 	const profileCardStats = profileCard.querySelector('.ProfileCardStats');
 	profileCardStats.parentNode.insertBefore(biases, profileCardStats);
+
+	const gravitySouth = profileCard.classList.contains('gravity-south');
+	const offset = gravitySouth ? biases.offsetHeight : 0;
+	profileHoverContainer.style.transform = `translateY(-${offset}px)`;
 };
 
 observer = new MutationObserver(injectChart);
