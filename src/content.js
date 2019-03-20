@@ -48,7 +48,7 @@ const injectChart = async () => {
 	const container = document.createElement('div');
 	container.innerHTML = `
 	<div class="ProfileCardBias ProfileCardStats">
-		<span class="ProfileCardStats-statLabel u-block">Bias</span>
+		<span class="ProfileCardStats-statLabel u-block">Coinbias</span>
 	</div>`;
 	const biases = container.children[0];
 
