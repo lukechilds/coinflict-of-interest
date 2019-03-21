@@ -35,6 +35,50 @@ const preloadTweetData = () => {
 
 const escapeHtml = string => string.replace(/["'&<>]/g, '');
 
+const calculateBias = data => {
+	const SUPPORTED_CURRENCIES = ['BTC', 'ETH', 'XRP', 'BCH'];
+	const BIAS_REDUCER = 0.5;
+	const BIAS_MIN_THRESHOLD = 10;
+
+	let currencies = data.clusters
+		.map(currency => ({
+			symbol: currency.abbr,
+			name: currency.display,
+			influence: currency.score
+		}))
+		.filter(currency => SUPPORTED_CURRENCIES.includes(currency.symbol))
+		.sort((a, b) => {
+			if (a.influence > b.influence) {
+				return -1;
+			}
+			if (a.influence < b.influence) {
+				return 1;
+			}
+			return 0;
+		})
+		.map((currency, index) => {
+			const multiplier = Math.pow(BIAS_REDUCER, index);
+			const bias = currency.influence * multiplier;
+
+			return {...currency, bias};
+		});
+
+	const totalBiasSum = currencies
+		.map(currency => currency.bias)
+		.reduce((a, b) => a + b);
+
+	currencies = currencies
+		.map(currency => {
+			let bias = (currency.bias / totalBiasSum) * 100;
+			bias = (bias < BIAS_MIN_THRESHOLD) ? 0 : bias;
+
+			return {...currency, bias};
+		});
+
+	return SUPPORTED_CURRENCIES
+		.map(symbol => currencies.find(currency => currency.symbol === symbol));
+}
+
 const injectChart = async () => {
 	const profileHoverContainer = document.querySelector('#profile-hover-container');
 	const profileCard = profileHoverContainer.querySelector('.profile-card');
@@ -82,24 +126,15 @@ const injectChart = async () => {
 	const biases = container.children[0];
 
 	if (data) {
-		const currencies = data.clusters
-			.filter(currency => ['BTC', 'ETH', 'XRP', 'BCH'].includes(currency.abbr));
-
-		const totalScore = currencies
-			.map(currency => Number(currency.score))
-			.reduce((a, b) => a + b);
+		const currencies = calculateBias(data);
 
 		currencies.forEach(currency => {
-			const biasThreshold = 5;
-			let bias = (Number(currency.score) / totalScore) * 100;
-			bias = (bias < biasThreshold) ? 0 : bias;
-
 			const container = document.createElement('div');
 			container.innerHTML = `
 			<div class="bias">
-				<span class="ProfileCardStats-statLabel u-block">${escapeHtml(currency.display)}</span>
+				<span class="ProfileCardStats-statLabel u-block">${escapeHtml(currency.name)}</span>
 				<div class="bias-amount-container">
-					<div class="bias-amount u-bgUserColor" style="width: ${bias}%;"></div>
+					<div class="bias-amount u-bgUserColor" style="width: ${Number(currency.bias)}%;"></div>
 				</div>
 			</div>`;
 			biases.appendChild(container.children[0]);
