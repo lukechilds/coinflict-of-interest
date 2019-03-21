@@ -73,3 +73,5 @@ const injectChart = async () => {
 	const offset = gravitySouth ? (biases.offsetHeight - negativeMargin) : 0;
 	profileHoverContainer.style.transform = `translateY(-${offset}px)`;
 };
+
+export default injectChart;
