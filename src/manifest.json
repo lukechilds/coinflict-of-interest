@@ -9,7 +9,7 @@
 		{
 			"run_at": "document_end",
 			"matches": ["https://twitter.com/*"],
-			"js": ["src/content.js"]
+			"js": ["content.js"]
 		}
 	]
 }

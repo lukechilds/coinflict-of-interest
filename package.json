@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "build": "webpack src/content.js --mode production"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^5.0.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  },
+  "dependencies": {
+    "escape-html": "^1.0.3"
+  }
+}
