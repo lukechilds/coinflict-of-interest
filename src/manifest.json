@@ -13,7 +13,8 @@
 		{
 			"run_at": "document_end",
 			"matches": ["https://twitter.com/*"],
-			"js": ["content.js"]
+			"js": ["content.js"],
+			"css": ["content.css"]
 		}
 	]
 }

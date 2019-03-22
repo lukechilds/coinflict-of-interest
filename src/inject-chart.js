@@ -14,36 +14,9 @@ const injectChart = async () => {
 	const username = profileCard.querySelector('[data-screen-name]').dataset.screenName;
 	const data = await getData(username);
 
-	const negativeMargin = 12;
 	const container = document.createElement('div');
 	container.innerHTML = `
 	<div class="ProfileCardBias ProfileCardStats">
-		<style>
-			.ProfileCardBias {
-				margin-top: -${negativeMargin}px;
-				padding-bottom: 8px;
-			}
-
-			.ProfileCardBias .bias:not(:last-of-type) {
-				margin-bottom: 4px;
-			}
-
-			.ProfileCardBias .bias-amount-container {
-				position: relative;
-				width: 100%;
-				height: 8px;
-				background: #ccc;
-				border-radius: 4px;
-			}
-
-			.ProfileCardBias .bias-amount {
-				position: absolute;
-				top: 0;
-				left: 0;
-				height: 100%;
-				border-radius: 4px;
-			}
-		</style>
 		<div><strong>Bias</strong></div>
 	</div>`;
 	const biases = container.children[0];
@@ -65,6 +38,9 @@ const injectChart = async () => {
 	} else {
 		biases.appendChild(document.createTextNode('No bias data available for this user.'));
 	}
+
+	const negativeMargin = 12;
+	biases.style.marginTop = `-${negativeMargin}px`;
 
 	const profileCardStats = profileCard.querySelector('.ProfileCardStats');
 	profileCardStats.parentNode.insertBefore(biases, profileCardStats);
