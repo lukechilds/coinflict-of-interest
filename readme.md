@@ -22,6 +22,12 @@ However this can be time consuming and it isn't always easy to tell someone's bi
 
 This browser extension helps you get quick insights into user biases by injecting the data straight into Twitter. Bias information is displayed inside the users profile card that pops up when you hover over their avatar. It's also displayed under a users bio on their profile.
 
+## Install
+
+- [**Chrome** extension](https://chrome.google.com/webstore/detail/dcfdkmkdffaojlgdhpnhejhpfeobddog/)
+- [**Firefox** add-on](https://addons.mozilla.org/en-US/firefox/addon/coinflict-of-interest)
+- **Opera** extension: Use [this Opera extension](https://addons.opera.com/en/extensions/details/download-chrome-extension-9/) to install the Chrome version.
+
 ## Build from Source
 
 ### `yarn`
