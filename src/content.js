@@ -1,10 +1,10 @@
-import preloadTweetData from './preload-tweet-data';
+import preloadData from './preload-data';
 import injectChart from './inject-chart';
 
 const observer = new MutationObserver(() => {
-	preloadTweetData();
+	preloadData();
 	injectChart();
 });
 observer.observe(document.body, {childList: true, subtree: true});
 
-preloadTweetData();
+preloadData();
