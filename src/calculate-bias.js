@@ -18,16 +18,13 @@ const calculateBias = data => {
 		const currency = data.clusters.find(cluster => cluster.abbr === symbol);
 
 		if (currency) {
-			currencies.push(currency);
+			currencies.push({
+				symbol: currency.abbr,
+				name: currency.display,
+				influence: currency.score
+			});
 		}
 	}
-
-	// Format the currency objects
-	currencies = currencies.map(currency => ({
-		symbol: currency.abbr,
-		name: currency.display,
-		influence: currency.score
-	}));
 
 	// Derive bias from influence
 	const largestInfluence = Math.max(...currencies.map(currency => currency.influence));
