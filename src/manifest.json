@@ -1,6 +1,9 @@
 {
 	"name": "Coinflict of Interest",
 	"version": "1.0.0",
+	"icons": {
+		"256": "icon.png"
+	},
 	"description": "Show user biases on Crypto Twitter.",
 	"homepage_url": "https://github.com/lukechilds/coinflict-of-interest",
 	"manifest_version": 2,
