@@ -8,16 +8,19 @@ const getData = async username => {
 		return cachedData;
 	}
 
-	const response = await fetch(url);
+	const result = fetch(url)
+		.then(async response => {
+			if (response.status === 404) {
+				return false;
+			}
 
-	if (response.status === 404) {
-		dataCache.set(url, false);
-		return false;
-	}
+			const data = await response.json();
+			return data;
+		});
 
-	const data = await response.json();
-	dataCache.set(url, data);
-	return data;
+	dataCache.set(url, result);
+
+	return result;
 };
 
 export default getData;
