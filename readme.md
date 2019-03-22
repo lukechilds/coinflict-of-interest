@@ -22,6 +22,16 @@ However this can be time consuming and it isn't always easy to tell someone's bi
 
 This browser extension helps you get quick insights into user biases by injecting the data straight into Twitter. Bias information is displayed inside the users profile card that pops up when you hover over their avatar. It's also displayed under a users bio on their profile.
 
+## Build from Source
+
+### `yarn`
+
+Install dependencies
+
+### `yarn build`
+
+Build the unpacked extension into the `dist` directory.
+
 ## License
 
 MIT © Luke Childs
