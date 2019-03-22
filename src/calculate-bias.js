@@ -1,7 +1,7 @@
 const calculateBias = data => {
 	const SUPPORTED_CURRENCIES = ['BTC', 'ETH', 'XRP', 'BCH'];
 	const BIAS_REDUCER = 0.5;
-	const BIAS_MIN_THRESHOLD = 10;
+	const BIAS_MIN_THRESHOLD = 5;
 
 	// Create correctly ordered array of currency objects
 	let currencies = [];
@@ -29,8 +29,20 @@ const calculateBias = data => {
 			return {...currency, bias};
 	});
 
+	// Zero values below threshold
+	let totalBiasSum = currencies
+		.map(currency => currency.bias)
+		.reduce((a, b) => a + b);
+
+	currencies = currencies.map(currency => {
+		let biasAsPercentage = (currency.bias / totalBiasSum) * 100;
+		const bias = (biasAsPercentage < BIAS_MIN_THRESHOLD) ? 0 : currency.bias;
+
+		return {...currency, bias};
+	});
+
 	// Convert bias into percentages
-	const totalBiasSum = currencies
+	totalBiasSum = currencies
 		.map(currency => currency.bias)
 		.reduce((a, b) => a + b);
 
