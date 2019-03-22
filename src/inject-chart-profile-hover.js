@@ -2,7 +2,7 @@ import buildBiasElement from './build-bias-element';
 
 const injectChartProfileHover = async () => {
 	const profileHoverContainer = document.querySelector('#profile-hover-container');
-	const profileCard = profileHoverContainer.querySelector('.profile-card');
+	const profileCard = profileHoverContainer ? profileHoverContainer.querySelector('.profile-card') : false;
 
 	if (!(profileCard && !profileCard.dataset.coinflict)) {
 		return;
