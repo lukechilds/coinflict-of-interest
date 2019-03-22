@@ -1,9 +1,9 @@
 import preloadData from './preload-data';
-import injectChart from './inject-chart';
+import injectChartProfileHover from './inject-chart-profile-hover';
 
 const observer = new MutationObserver(() => {
 	preloadData();
-	injectChart();
+	injectChartProfileHover();
 });
 observer.observe(document.body, {childList: true, subtree: true});
 
