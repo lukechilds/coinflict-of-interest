@@ -3,29 +3,33 @@ const calculateBias = data => {
 	const BIAS_REDUCER = 0.5;
 	const BIAS_MIN_THRESHOLD = 10;
 
-	let currencies = data.clusters
-		.map(currency => ({
-			symbol: currency.abbr,
-			name: currency.display,
-			influence: currency.score
-		}))
-		.filter(currency => SUPPORTED_CURRENCIES.includes(currency.symbol))
-		.sort((a, b) => {
-			if (a.influence > b.influence) {
-				return -1;
-			}
-			if (a.influence < b.influence) {
-				return 1;
-			}
-			return 0;
-		})
-		.map((currency, index) => {
-			const multiplier = Math.pow(BIAS_REDUCER, index);
-			const bias = currency.influence * multiplier;
+	// Create correctly ordered array of currency objects
+	let currencies = [];
+	for (const symbol of SUPPORTED_CURRENCIES) {
+		const currency = data.clusters.find(cluster => cluster.abbr === symbol);
+
+		if (currency) {
+			currencies.push(currency);
+		}
+	}
+
+	// Format the currency objects
+	currencies = currencies.map(currency => ({
+		symbol: currency.abbr,
+		name: currency.display,
+		influence: currency.score
+	}));
+
+	// Derive bias from influence
+	const largestInfluence = Math.max(...currencies.map(currency => currency.influence));
+	currencies = currencies.map(currency => {
+			const influenceComparedToLargest = (currency.influence / largestInfluence);
+			const bias = (currency.influence < 1) ? 0 : Math.pow(currency.influence, influenceComparedToLargest);
 
 			return {...currency, bias};
-		});
+	});
 
+	// Convert bias into percentages
 	const totalBiasSum = currencies
 		.map(currency => currency.bias)
 		.reduce((a, b) => a + b);
@@ -33,13 +37,11 @@ const calculateBias = data => {
 	currencies = currencies
 		.map(currency => {
 			let bias = (currency.bias / totalBiasSum) * 100;
-			bias = (bias < BIAS_MIN_THRESHOLD) ? 0 : bias;
 
 			return {...currency, bias};
 		});
 
-	return SUPPORTED_CURRENCIES
-		.map(symbol => currencies.find(currency => currency.symbol === symbol));
+	return currencies;
 };
 
 export default calculateBias;
