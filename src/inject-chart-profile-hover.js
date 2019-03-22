@@ -7,6 +7,7 @@ const injectChartProfileHover = async () => {
 	if (!(profileCard && !profileCard.dataset.coinflict)) {
 		return;
 	}
+
 	profileCard.dataset.coinflict = true;
 
 	const username = profileCard.querySelector('[data-screen-name]').dataset.screenName;

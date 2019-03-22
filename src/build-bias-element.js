@@ -24,10 +24,10 @@ const buildBiasElement = async username => {
 					<div class="bias-amount u-bgUserColor" style="width: ${Number(currency.bias)}%;"></div>
 				</div>
 			</div>`;
-			biases.appendChild(container.children[0]);
+			biases.append(container.children[0]);
 		});
 	} else {
-		biases.appendChild(document.createTextNode('No bias data available for this user.'));
+		biases.append(document.createTextNode('No bias data available for this user.'));
 	}
 
 	return biases;

@@ -7,6 +7,7 @@ const injectData = () => {
 	injectChartProfileHover();
 	preloadData();
 };
+
 injectData();
 
 const observer = new MutationObserver(injectData);

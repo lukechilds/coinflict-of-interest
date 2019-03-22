@@ -29,11 +29,11 @@ const calculateBias = data => {
 	// Derive bias from influence
 	const largestInfluence = Math.max(...currencies.map(currency => currency.influence));
 	currencies = currencies.map(currency => {
-			const influenceComparedToLargest = (currency.influence / largestInfluence);
-			const exponent = influenceComparedToLargest * EXPONENT_MULITIPLIER;
-			const bias = (currency.influence < 1) ? 0 : Math.pow(currency.influence, exponent);
+		const influenceComparedToLargest = (currency.influence / largestInfluence);
+		const exponent = influenceComparedToLargest * EXPONENT_MULITIPLIER;
+		const bias = (currency.influence < 1) ? 0 : currency.influence ** exponent;
 
-			return {...currency, bias};
+		return {...currency, bias};
 	});
 
 	// Zero values below threshold
@@ -42,7 +42,7 @@ const calculateBias = data => {
 		.reduce((a, b) => a + b);
 
 	currencies = currencies.map(currency => {
-		let biasAsPercentage = (currency.bias / totalBiasSum) * 100;
+		const biasAsPercentage = (currency.bias / totalBiasSum) * 100;
 		const bias = (biasAsPercentage < BIAS_MIN_THRESHOLD) ? 0 : currency.bias;
 
 		return {...currency, bias};
