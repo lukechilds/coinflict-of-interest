@@ -1,3 +1,12 @@
+// EXPONENT_MULITIPLIER is used to tweak how heavily the difference between the
+// influence affects the bias result.
+// Setting EXPONENT_MULITIPLIER to 0 will mean all biases are equal.
+// Setting EXPONENT_MULITIPLIER to a large enough number will mean the bias will sway
+// 100% towards the currency with the most influence.
+
+// BIAS_MIN_THRESHOLD is used to set a percentage at which biases will be
+// considered 0 if they are below.
+
 const calculateBias = data => {
 	const SUPPORTED_CURRENCIES = ['BTC', 'ETH', 'XRP', 'BCH'];
 	const EXPONENT_MULITIPLIER = 0.8;
