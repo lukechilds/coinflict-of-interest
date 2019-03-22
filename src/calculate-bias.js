@@ -46,12 +46,11 @@ const calculateBias = data => {
 		.map(currency => currency.bias)
 		.reduce((a, b) => a + b);
 
-	currencies = currencies
-		.map(currency => {
-			let bias = (currency.bias / totalBiasSum) * 100;
+	currencies = currencies.map(currency => {
+		const bias = (currency.bias / totalBiasSum) * 100;
 
-			return {...currency, bias};
-		});
+		return {...currency, bias};
+	});
 
 	return currencies;
 };
