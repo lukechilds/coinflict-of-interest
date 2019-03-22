@@ -1,13 +1,13 @@
 import preloadData from './preload-data';
-import injectChartProfileHover from './inject-chart-profile-hover';
 import injectChartProfilePage from './inject-chart-profile-page';
+import injectChartProfileHover from './inject-chart-profile-hover';
 
-const observer = new MutationObserver(() => {
-	preloadData();
-	injectChartProfileHover();
+const injectData = () => {
 	injectChartProfilePage();
-});
-observer.observe(document.body, {childList: true, subtree: true});
+	injectChartProfileHover();
+	preloadData();
+};
+injectData();
 
-preloadData();
-injectChartProfilePage();
+const observer = new MutationObserver(injectData);
+observer.observe(document.body, {childList: true, subtree: true});
