@@ -1,6 +1,6 @@
 const calculateBias = data => {
 	const SUPPORTED_CURRENCIES = ['BTC', 'ETH', 'XRP', 'BCH'];
-	const BIAS_REDUCER = 0.5;
+	const EXPONENT_MULITIPLIER = 0.8;
 	const BIAS_MIN_THRESHOLD = 5;
 
 	// Create correctly ordered array of currency objects
@@ -24,7 +24,8 @@ const calculateBias = data => {
 	const largestInfluence = Math.max(...currencies.map(currency => currency.influence));
 	currencies = currencies.map(currency => {
 			const influenceComparedToLargest = (currency.influence / largestInfluence);
-			const bias = (currency.influence < 1) ? 0 : Math.pow(currency.influence, influenceComparedToLargest);
+			const exponent = influenceComparedToLargest * EXPONENT_MULITIPLIER;
+			const bias = (currency.influence < 1) ? 0 : Math.pow(currency.influence, exponent);
 
 			return {...currency, bias};
 	});
