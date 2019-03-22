@@ -1,6 +1,10 @@
 .ProfileCardBias {
 	padding-bottom: 8px;
 }
+.ProfileHeaderCard .ProfileCardBias {
+    padding-left: 0;
+    padding-right: 0;
+}
 
 .ProfileCardBias .bias:not(:last-of-type) {
 	margin-bottom: 4px;
