@@ -1,3 +1,7 @@
+<div align="center">
+  <img width="128" src="src/icon.png">
+</div>
+
 # Coinflict of Interest
 
 > Browser extension to show user biases on Crypto Twitter.
