@@ -1,9 +1,16 @@
 import getData from './get-data';
 
 const preloadData = () => {
-	const elements = Array.from(document.querySelectorAll('[data-screen-name]'));
+	// Get all usernames we can find with data-screen-name
+	const usernames = Array.from(document.querySelectorAll('[data-screen-name]'))
+		.map(element => element.dataset.screenName);
 
-	new Set(elements.map(element => element.dataset.screenName)).forEach(getData);
+	// Also scrape usernames from mentions and other user id links
+	const linkUsernames = Array.from(document.querySelectorAll('a[data-user-id], a[data-mentioned-user-id]'))
+		.map(a => a.href.split('/').pop());
+
+
+	new Set([...usernames, ...linkUsernames]).forEach(getData);
 };
 
 export default preloadData;
