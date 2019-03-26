@@ -26,6 +26,8 @@ However this can be time consuming and it isn't always easy to tell someone's bi
 
 This browser extension helps you get quick insights into user biases by injecting the data straight into Twitter. Bias information is displayed inside the users profile card that pops up when you hover over their avatar. It's also displayed under a users bio on their profile.
 
+All data provided by [hive.one](https://hive.one).
+
 ## Install
 
 - [**Chrome** extension](https://chrome.google.com/webstore/detail/dcfdkmkdffaojlgdhpnhejhpfeobddog/)
