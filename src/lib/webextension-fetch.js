@@ -23,7 +23,7 @@ const deserializeResponse = serializedResponse => {
 
 const webextensionFetch = async (input, init) => {
 	const serializedResponse = await browser.runtime.sendMessage({
-		contentScriptQuery: 'webextension-fetch',
+		action: 'webextension-fetch',
 		input,
 		init
 	});
@@ -32,8 +32,8 @@ const webextensionFetch = async (input, init) => {
 };
 
 webextensionFetch.listen = () => {
-	browser.runtime.onMessage.addListener(({contentScriptQuery, input, init}) => {
-		if (contentScriptQuery === 'webextension-fetch') {
+	browser.runtime.onMessage.addListener(({action, input, init}) => {
+		if (action === 'webextension-fetch') {
 			return fetch(input, init).then(serializeResponse);
 		}
 	});
