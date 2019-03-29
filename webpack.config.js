@@ -2,11 +2,15 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = () => ({
-	devtool: 'sourcemap',
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: 'content.js'
+	entry: {
+		content: './src/content',
+		background: './src/background',
 	},
+	output: {
+		path: path.join(__dirname, 'dist'),
+		filename: '[name].js'
+	},
+	devtool: 'sourcemap',
 	plugins: [
 		new CopyWebpackPlugin([
 			{

@@ -1,3 +1,5 @@
+import fetch from './webextension-fetch';
+
 const dataCache = new Map();
 
 const getData = async userId => {

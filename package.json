@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "webpack src/content.js --mode production",
+    "build": "webpack --mode production",
     "test": "xo"
   },
   "xo": {
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "camelcase": "^5.2.0",
-    "escape-html": "^1.0.3"
+    "escape-html": "^1.0.3",
+    "webextension-polyfill": "^0.4.0"
   }
 }

@@ -1,6 +1,6 @@
-import preloadData from './preload-data';
-import injectChartProfilePage from './inject-chart-profile-page';
-import injectChartProfileHover from './inject-chart-profile-hover';
+import preloadData from './lib/preload-data';
+import injectChartProfilePage from './lib/inject-chart-profile-page';
+import injectChartProfileHover from './lib/inject-chart-profile-hover';
 
 const injectData = () => {
 	injectChartProfilePage();
