@@ -2,7 +2,19 @@ import fetch from './webextension-fetch';
 
 const dataCache = new Map();
 
+const getAvailableUsers = fetch('https://hive.one/api/influencers/scores/people/available/').then(async res => {
+	const body = await res.json();
+
+	return body.data.available;
+});
+
 const getData = async userId => {
+	const availableUsers = await getAvailableUsers;
+
+	if (!availableUsers.includes(userId)) {
+		return false;
+	}
+
 	const url = `https://hive.one/api/influencers/scores/person/id/${userId}/`;
 
 	const cachedData = dataCache.get(url);
