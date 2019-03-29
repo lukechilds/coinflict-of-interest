@@ -32,11 +32,9 @@ const webextensionFetch = async (input, init) => {
 };
 
 webextensionFetch.listen = () => {
-	browser.runtime.onMessage.addListener(async ({contentScriptQuery, input, init}) => {
+	browser.runtime.onMessage.addListener(({contentScriptQuery, input, init}) => {
 		if (contentScriptQuery === 'webextension-fetch') {
-			const response = await fetch(input, init);
-
-			return serializeResponse(response);
+			return fetch(input, init).then(serializeResponse);
 		}
 	});
 };
