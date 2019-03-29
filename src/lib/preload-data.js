@@ -10,7 +10,7 @@ const scrapeDataAttribute = dataAttribute => {
 const preloadData = () => {
 	new Set([
 		...scrapeDataAttribute('user-id'),
-		...scrapeDataAttribute('mention-user-id'),
+		...scrapeDataAttribute('mention-user-id')
 	]).forEach(getData);
 };
 

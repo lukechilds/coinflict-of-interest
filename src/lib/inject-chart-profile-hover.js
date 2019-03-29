@@ -10,7 +10,7 @@ const injectChartProfileHover = async () => {
 
 	profileCard.dataset.coinflict = true;
 
-	const userId = profileHoverContainer.dataset.userId;
+	const {userId} = profileHoverContainer.dataset;
 	const biases = await buildBiasElement(userId);
 
 	const negativeMargin = 12;

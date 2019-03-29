@@ -7,7 +7,7 @@ const serializeResponse = async response => {
 
 	for (const [header, value] of headers.entries()) {
 		serializedResponse.headers[header] = value;
-	};
+	}
 
 	serializedResponse.body = [...new Uint8Array(await response.arrayBuffer())];
 
@@ -36,7 +36,7 @@ webextensionFetch.listen = () => {
 		if (contentScriptQuery === 'webextension-fetch') {
 			const response = await fetch(input, init);
 
-			return await serializeResponse(response);
+			return serializeResponse(response);
 		}
 	});
 };

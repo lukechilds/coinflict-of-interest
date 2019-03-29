@@ -9,7 +9,7 @@ const injectChartProfilePage = async () => {
 
 	profileHeaderCard.dataset.coinflict = true;
 
-	const userId = document.querySelector('.ProfileNav').dataset.userId;
+	const {userId} = document.querySelector('.ProfileNav').dataset;
 	const biases = await buildBiasElement(userId);
 
 	const bio = profileHeaderCard.querySelector('.ProfileHeaderCard-bio');
