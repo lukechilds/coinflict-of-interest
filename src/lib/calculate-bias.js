@@ -15,12 +15,12 @@ const calculateBias = data => {
 	// Create correctly ordered array of currency objects
 	let currencies = [];
 	for (const symbol of SUPPORTED_CURRENCIES) {
-		const currency = data.clusters.find(cluster => cluster.abbr === symbol);
+		const currency = data.data.scores.find(score => score.node.abbr === symbol).node;
 
 		if (currency) {
 			currencies.push({
 				symbol: currency.abbr,
-				name: currency.display,
+				name: currency.name,
 				influence: currency.score
 			});
 		}
