@@ -2,8 +2,8 @@ import escapeHtml from 'escape-html';
 import getData from './get-data';
 import calculateBias from './calculate-bias';
 
-const buildBiasElement = async username => {
-	const data = await getData(username);
+const buildBiasElement = async userId => {
+	const data = await getData(userId);
 
 	const container = document.createElement('div');
 	container.innerHTML = `

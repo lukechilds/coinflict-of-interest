@@ -1,7 +1,7 @@
 const dataCache = new Map();
 
-const getData = async username => {
-	const url = `https://hive.one/api/top-people/${username}`;
+const getData = async userId => {
+	const url = `https://hive.one/api/top-people/${userId}`;
 
 	const cachedData = dataCache.get(url);
 	if (typeof cachedData !== 'undefined') {

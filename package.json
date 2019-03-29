@@ -15,6 +15,7 @@
     "xo": "^0.24.0"
   },
   "dependencies": {
+    "camelcase": "^5.2.0",
     "escape-html": "^1.0.3"
   }
 }
