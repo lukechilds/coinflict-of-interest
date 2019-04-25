@@ -1,6 +1,7 @@
 {
   "scripts": {
     "build": "webpack --mode production",
+    "build:dev": "npm run build -- --mode development",
     "test": "xo"
   },
   "xo": {
